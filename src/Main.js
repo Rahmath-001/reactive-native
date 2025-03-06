@@ -21,6 +21,7 @@ export default function Main() {
   const loadPlayersData = async () => {
     try {
       const data = await readPlayers();
+      console.log('Players Data:', data); 
       setPlayersData(data.players);
     } catch (error) {
       console.error('Error loading players data:', error);
@@ -36,6 +37,7 @@ export default function Main() {
   };
 
   const handleShowHighScore = () => {
+    console.log('Showing high scores');
     setShowHighScore(true);
   };
 
@@ -76,9 +78,12 @@ export default function Main() {
           <FlatList
             data={playersData}
             keyExtractor={(item, index) => index.toString()}
-            renderItem={({ item }) => (
-              <Text style={styles.playerScore}>{item.name}: {item.score}</Text>
-            )}
+            renderItem={({ item }) => {
+              console.log('Rendering item:', item);  // Log to check each item being rendered
+              return (
+                <Text style={styles.playerScore}>{item.name}: {item.score}</Text>
+              );
+            }}
           />
         </View>
       </Modal>
